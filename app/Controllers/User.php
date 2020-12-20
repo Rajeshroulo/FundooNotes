@@ -3,6 +3,10 @@ namespace App\Controllers;
 
 class User extends BaseController{
     public function index(){
+        echo "sony";
+    }
+
+    public function login(){
         $data=[];
         helper(['form']);
 
@@ -20,6 +24,7 @@ class User extends BaseController{
         echo view('templates/footer');
 
     }
+    
 
     public function create(){
         

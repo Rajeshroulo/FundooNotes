@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="email">Username</label>
+                                <label for="email">Email</label>
                                 <input type="text" class="form-control" id="email" name="email" value="<?= set_value('email') ?>">
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                         <div class="col-12 col-sm-8 ">
-                            <a href="/">already have an account</a>
+                            <a href="<?=site_url('/login') ?>">already have an account</a>
                         </div>
                     </div>
                 </form>

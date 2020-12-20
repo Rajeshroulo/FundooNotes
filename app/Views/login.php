@@ -19,10 +19,10 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                         <div class="col-12 col-sm-8 ">
-                            <a href="/register">create new account</a>
+                            <a href="<?=site_url('/register') ?>">create new account</a>
                         </div>
                     </div>
-                </form>
+                </form>                
             </div>
         </div>
     </div>
