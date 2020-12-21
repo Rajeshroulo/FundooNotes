@@ -33,13 +33,9 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'User::index');
 $routes->get('/login', 'User::login');
 
-
 $routes->match(['get','post'],'/register', 'User::register');
 
-
-
 $routes->get('/user/create', 'User::create');
-
 
 
 /**

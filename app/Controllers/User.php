@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 class User extends BaseController{
     public function index(){
-        echo "sony";
+        echo view ('user/list');
     }
 
     public function login(){

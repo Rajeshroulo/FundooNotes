@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Simple CRUD Application</title>
+    <title>Google keep</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css'); ?>">
 </head>
@@ -31,12 +31,14 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" placeholder="enter name" name="name" class="form-control" value="">
+                            <label>title</label>
+                            <input type="text" placeholder="enter title"  class="form-control" value="">
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        
+                        <div class="form-group">
+                            <label>notes</label>
+                            <input type="text" placeholder="enter notes" class="form-control" value="">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>                        
                     </div>
                 </div>
             </div>
