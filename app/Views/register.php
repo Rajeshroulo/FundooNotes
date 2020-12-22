@@ -4,12 +4,12 @@
             <div class="container">
                 <h3>Register</h3>
                 <hr>
-                <form class="" action="/register" method="post">
+                <form class="" action="<?= site_url('/submit') ?>" method="post">
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
-                                <label for="firstname">firstname</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" value="<?= set_value('firstname') ?>">
+                                <label for="name">firstname</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= set_value('firstname') ?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">

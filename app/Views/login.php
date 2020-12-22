@@ -5,7 +5,7 @@
             <div class="container">
                 <h3>Login</h3>
                 <hr>
-                <form class="" action="/" method="post">
+                <form action="<?= site_url('/user') ?>" method="post">
                     <div class="form-group">
                         <label for="email">Username</label>
                         <input type="text" class="form-control" id="email" name="email" placeholder="enter mail" value="<?= set_value('email') ?>">

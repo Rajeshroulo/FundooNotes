@@ -42,7 +42,6 @@
         .cards {
             font-size: 1em;
             overflow: hidden;
-            padding: 10px;
             border: none;
             border-radius: .28571429rem;
             box-shadow: 0 1px 3px 0 #1c1c1f, 0 0 0 1px #1c1c1f;
@@ -52,7 +51,7 @@
             font-size: 1em;
             position: relative;
             margin: 0;
-            padding: 10px;
+            padding: 4px;
             border: none;
             box-shadow: none;
         }
@@ -65,7 +64,7 @@
 
         .card-titles {
             font-size: 1.28571429em;
-            font-weight: 700;
+            font-weight: 300;
             line-height: 1.2857em;
         }
 
@@ -277,8 +276,12 @@
                                         <div class="card-texts">
                                             today meeting postponed at 3                                       
                                         </div>
-                                         <a href="" class="btn btn-primary btn-sm">Edit</a>
-                                         <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                         <a href="" class="btn btn-primary btn-sm">
+                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                         </a>
+                                         <a href="" class="btn btn-danger btn-sm">
+                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                         </a>
                                     </div>
                                 </div>
                             </div>

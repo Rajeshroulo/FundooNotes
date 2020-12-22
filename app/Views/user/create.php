@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-purple text-white">
-                        <div class="card-header-title">Add user </div>
+                        <div class="card-header-title">Add note </div>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
