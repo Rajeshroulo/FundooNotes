@@ -13,15 +13,7 @@
             <div class="text-white h4">Fundoo Notes</div>
         </div>
     </div>
-
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="#" class="btn btn-primary">Add</a>
-            </div>
-        </div>
-    </div>
-
+    
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
@@ -31,14 +23,16 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>title</label>
+                            <label>Title</label>
                             <input type="text" placeholder="enter title"  class="form-control" value="">
                         </div>
                         <div class="form-group">
-                            <label>notes</label>
+                            <label>Notes</label>
                             <input type="text" placeholder="enter notes" class="form-control" value="">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>                        
+                        </div>   
+                        <div class="modal-footer">                    
+                        <button type="submit" class="btn btn-primary">Save</button> 
+                        </div>                                              
                     </div>
                 </div>
             </div>

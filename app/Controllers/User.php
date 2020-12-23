@@ -3,6 +3,15 @@ namespace App\Controllers;
 use App\Models\UserModel;
 
 class User extends BaseController{
+
+    protected $session;
+
+    function __construct()
+    {
+        $this->session = \Config\Services::session();
+        $this->session->start();
+
+    }
     public function index(){
         $userModel = new UserModel();
         $data['user'] = $userModel->orderBy('id', 'DESC')->findAll();
@@ -18,16 +27,44 @@ class User extends BaseController{
         echo view('templates/footer');
     }
 
-    public function store() {
+    public function userLogin(){
         $userModel = new UserModel();
         $data = [
-            
-            'name' => $this->request->getVar('name'),
-            'email'  => $this->request->getVar('email'),
+            'id' => $this->request->getVar('id'),
             'password' => $this->request->getVar('password'),
+            'email'  => $this->request->getVar('email'),
         ];
-        $userModel->insert($data);
-        return $this->response->redirect(site_url('/login'));
+
+        if(!empty($users=$userModel->where($data)->first()))
+        {
+            $_SESSION['userId']=$users['id'];
+            $_SESSION['userPassword']=$users['password'];
+            $_SESSION['userEmail']=$users['email'];
+            // $userId=$this->session->userId;
+            return $this->response->redirect(site_url('/user'));
+        }
+        else{
+            return $this->response->redirect(site_url('/login'));
+        }
+
+    }
+
+    public function store() {
+        $userModel = new UserModel();
+        if(!empty($userModel->where('email',$this->request->getVar('email'))->first()))
+        {
+            return $this->response->redirect(site_url('/register'));   
+        }
+        else{
+            $data = [
+
+                'name' => $this->request->getVar('name'),
+                'email'  => $this->request->getVar('email'),
+                'password' => $this->request->getVar('password'),
+            ];
+            $userModel->insert($data);
+            return $this->response->redirect(site_url('/login'));       
+        }
     }
 
     public function register(){
@@ -40,8 +77,8 @@ class User extends BaseController{
 
     }
     
-
     public function create(){
+         helper(['form']);
         
         return view('user/create');
     }
