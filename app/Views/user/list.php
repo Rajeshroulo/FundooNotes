@@ -42,9 +42,9 @@
         .cards {
             font-size: 1em;
             overflow: hidden;
-            border: none;
             border-radius: .28571429rem;
             box-shadow: 0 1px 3px 0 #1c1c1f, 0 0 0 1px #1c1c1f;
+            margin-bottom: 20px;
         }
 
         .card-blocks {
@@ -52,29 +52,23 @@
             position: relative;
             margin: 0;
             padding: 4px;
-            border: none;
+            border: 1px;
             box-shadow: none;
         }
 
         .card-img-top {
             display: block;
             width: 100%;
-            height: auto;
+            height: auto;            
         }
 
         .card-titles {
             font-size: 1.28571429em;
             font-weight: 300;
             line-height: 1.2857em;
-        }
+        }        
 
-        .card-texts {
-            clear: both;
-            margin-top: .5em;
-            color: rgba(0, 0, 0, .68);
-        }
-
-        .card-footer {
+        .card-footer {            
             font-size: 1em;
             position: static;
             top: 0;
@@ -84,6 +78,7 @@
             color: rgba(0, 0, 0, .4);
             border-top: 1px solid rgba(0, 0, 0, .05) !important;
             background: #fff;
+            margin-bottom: 15px;
         }
 
         .card-inverse .btn {
@@ -230,7 +225,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit" name="Save" class="btn btn-primary">Save </button>
+                  <button type="submit" name="Save" class="btn btn-primary" >Save </button>
                 </div>
               </form>
             </div>
