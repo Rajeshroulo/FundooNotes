@@ -35,11 +35,13 @@ $routes->post('/addthenote', 'Notes::addNote');
 $routes->get('/login', 'User::login');
 $routes->post('/userlogin', 'User::userLogin');
 $routes->post('/submit', 'User::store');
-
-
 $routes->get('/register', 'User::register');
-
 $routes->get('/user/create', 'User::create');
+
+
+$routes->get('/note', 'Notes::addNote');
+$routes->get('/notelist', 'Notes::notelist');
+
 
 
 /**

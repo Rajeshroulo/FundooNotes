@@ -11,6 +11,21 @@ class Notes extends BaseController{
         $this->session = \Config\Services::session();
     }
 
+    public function index(){
+
+        $notesModel = new NotesModel();
+        $data['notes'] = $notesModel->orderBy('id', 'DESC')->findAll();
+
+        if(isset($this->session->userId))
+        {
+            return view('Notelist', $data);
+        }
+        else
+        {
+            return $this->response->redirect(site_url('/login'));
+        }   
+    }
+
     public function addNote(){
         $notesModel = new NotesModel();
         $data = [
@@ -20,8 +35,14 @@ class Notes extends BaseController{
         ];
         $notesModel->insert($data);
         return $this->response->redirect(site_url('/user'));
-
         
+    }
+
+    public function notelist(){
+        $notesModel = new NotesModel();
+        $data['notes'] = $notesModel->orderBy('title', 'DESC')->findAll();   
+            return view('Notelist', $data);        
+          
     }
 }
 

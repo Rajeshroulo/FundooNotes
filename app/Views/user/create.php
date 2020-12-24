@@ -22,6 +22,7 @@
                         <div class="card-header-title">Add note </div>
                     </div>
                     <div class="card-body">
+                        <form>
                         <div class="form-group">
                             <label>Title</label>
                             <input type="text" placeholder="enter title"  class="form-control" value="">
@@ -32,7 +33,8 @@
                         </div>   
                         <div class="modal-footer">                    
                         <button type="submit" class="btn btn-primary">Save</button> 
-                        </div>                                              
+                        </div> 
+                        </form>                                             
                     </div>
                 </div>
             </div>

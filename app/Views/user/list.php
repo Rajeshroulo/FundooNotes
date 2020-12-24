@@ -206,7 +206,7 @@
                     <a href="#" data-toggle="modal" data-target="#basicModal" class="btn btn-primary">Add Note</a>
                 </div>
 
-                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
+                <div class="modal" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
           aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -221,11 +221,11 @@
                 <div class="modal-body">
                   <div class="form-group">
                             <label>Title</label>
-                            <input type="text" placeholder="enter title"  class="form-control" value="">
+                            <input type="text" name="title" placeholder="enter title"  class="form-control" value="">
                         </div>
                         <div class="form-group">
                             <label>Notes</label>
-                            <input type="text" placeholder="enter notes" class="form-control" value="">
+                            <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
                         </div>   
                 </div>
                 <div class="modal-footer">
@@ -298,28 +298,9 @@
                 </div>
 
 
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <div class="container">
-                        <div class="row" id="noteadd">
-                            <div class="col-sm-6 col-md-4 col-lg-5 mt-6">
-                                <div class="cards">
-
-                                    <div class="card-blocks">
-                                        <h6 class="card-titles">phpmeet</h6>
-                                        <div class="meta">
-                                        </div>
-                                        <div class="card-texts">
-                                            today meeting postponed at 3                                       
-                                        </div>
-                                         <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">
-                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                         </a>
-                                         <a href="" class="btn btn-danger btn-sm">
-                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                         </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row" id="noteadd">                            
                         </div>
                     </div>
                 </div>
@@ -329,6 +310,33 @@
 
     <script>
          $(document).ready(function () {
+            setTimeout(function () {
+                noteList();
+      }, 30);
+
+            $("#addnote").submit(function (event) {
+        // Prevent the form from submitting via the browser.
+        event.preventDefault();
+        noteAdd();
+        noteList();
+       
+      });
+
+
+      function noteList() {
+
+        $.ajax({
+          type: "GET",
+          url: "<?= site_url('/notelist')?>",
+          success: function (result) {
+           $("#noteadd").html(result);            
+          },
+          error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+          }
+        });
+      }
 
 
             function noteAdd() {
@@ -338,10 +346,9 @@
         // DO POST
         $.ajax({
           type: "POST",
-          url: "/addthenote",
+          url: "<?= site_url('/addthenote')?>",
           data: formData,
           success: function (result) {
-            $("#noteadd").append("<div class='col-sm-6 col-md-4 col-lg-3 mt-4'> <div class='cards'> <div class='card-blocks'> <h4 class='card-titles'>" + result.Name + "</h4> <div class='meta'> </div> <div class='card-texts'> " + result.Wish + " <hr> date:" + result.date + " <hr> id:" + result._id + "</div> </div> </div> </div>");
             $("#addnote")[0].reset();
                 $('#basicModal').modal('toggle');
             
@@ -352,6 +359,7 @@
           }
         });
       }
+
          });
     </script>
 
