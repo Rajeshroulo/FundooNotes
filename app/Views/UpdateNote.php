@@ -1,12 +1,11 @@
-<?php if ($notes) : ?>
-    <?php foreach ($notes as $note) : ?>
-        <div class="col-sm-4">
-            <div class="cards">
+<div class="col-sm-4">
+            <div class="cards">           
+      <input type="hidden" name="editnote" id="editnote" value="<?php echo $notesModel['id']; ?>">
                 <div class="card-blocks">
-                    <h5 class="card-titles"><?php echo $note['title']; ?></h5>
+                    <h5 class="card-titles"><?php echo $updatednote['title']; ?></h5>
 
                     <div class="card-body">
-                        <?php echo $note['note']; ?>
+                        <?php echo $updatednote['note']; ?>
                     </div>
                     <div class="card-footer">
                         <div class="float-right">
@@ -21,5 +20,3 @@
                 </div>
             </div>
         </div>
-    <?php endforeach; ?>
-<?php endif; ?>

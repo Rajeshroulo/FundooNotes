@@ -59,16 +59,16 @@
         .card-img-top {
             display: block;
             width: 100%;
-            height: auto;            
+            height: auto;
         }
 
         .card-titles {
             font-size: 1.28571429em;
             font-weight: 300;
             line-height: 1.2857em;
-        }        
+        }
 
-        .card-footer {            
+        .card-footer {
             font-size: 1em;
             position: static;
             top: 0;
@@ -201,36 +201,35 @@
                     <a href="#" data-toggle="modal" data-target="#basicModal" class="btn btn-primary">Add Note</a>
                 </div>
 
-                <div class="modal" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
-          aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"> Add Note</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+                <div class="modal" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel"> Add Note</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
-              <form id="addnote">
-                <div class="modal-body">
-                  <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" placeholder="enter title"  class="form-control" value="">
+                            <form id="addnote">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="title" placeholder="enter title" class="form-control" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Notes</label>
+                                        <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="Save" class="btn btn-primary">Save </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label>Notes</label>
-                            <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
-                        </div>   
+                    </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit" name="Save" class="btn btn-primary" >Save </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
             </div>
         </div>
 
@@ -261,7 +260,7 @@
                     </div>
 
 
-                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -273,14 +272,14 @@
 
                                 <form id="editthegreeting">
                                     <div class="modal-body">
-                                    <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" placeholder="enter title"  class="form-control" value="">
-                        </div>
-                        <div class="form-group">
-                            <label>Notes</label>
-                            <input type="text" placeholder="enter notes" class="form-control" value="">
-                        </div>  
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" name="title" placeholder="enter title" class="form-control" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -295,7 +294,7 @@
 
                 <div class="col-sm-9">
                     <div class="container">
-                        <div class="row" id="noteadd">                            
+                        <div class="row" id="noteadd">
                         </div>
                     </div>
                 </div>
@@ -304,48 +303,85 @@
     </div>
 
     <script>
-         $(document).ready(function () {
-            setTimeout(function () {
+        $(document).ready(function() {
+            setTimeout(function() {
                 noteList();
-      }, 30);
+            }, 30);
 
-            $("#addnote").submit(function (event) {
-        // Prevent the form from submitting via the browser.
-        event.preventDefault();
-        noteAdd();
-        noteList();
-       
-      });
+            $("#addnote").submit(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                noteAdd();
 
+            });
 
-      function noteList() {
+            function noteList() {
 
-        $.ajax({
-          type: "GET",
-          url: "<?= site_url('/notelist')?>",
-          success: function (result) {
-           $("#noteadd").html(result);            
-          },
-          error: function (e) {
-            alert("Error!")
-            console.log("ERROR: ", e);
-          }
-        });
-      }
+                $.ajax({
+                    type: "GET",
+                    url: "<?= site_url('/notelist') ?>",
+                    success: function(result) {
+                        $("#noteadd").html(result);
+                    },
+                    error: function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+
+            function singleNote(id) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?= site_url('/onenote') ?>",
+                    data: {
+                        noteid: id
+                    },
+                    success: function(result) {
+                        $("#noteadd").append(result);
+                    },
+                    error: function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+
 
 
             function noteAdd() {
-        // PREPARE FORM DATA
-        var formData = $("#addnote").serialize();
+                // PREPARE FORM DATA
+                var formData = $("#addnote").serialize();
 
-        // DO POST
+                // DO POST
+                $.ajax({
+                    type: "POST",
+                    url: "<?= site_url('/addthenote') ?>",
+                    data: formData,
+                    success: function(result) {
+                        singleNote(result);
+                        $("#addnote")[0].reset();
+                        $('#basicModal').modal('toggle');
+
+                    },
+                    error: function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+
+
+            function editNote() {
+
         $.ajax({
-          type: "POST",
-          url: "<?= site_url('/addthenote')?>",
+          type: "PUT",
+          url: "<?= site_url('/editnote') ?>",
           data: formData,
-          success: function (result) {
-            $("#addnote")[0].reset();
-                $('#basicModal').modal('toggle');
+          success: function (data) {
+            $("#editthegreeting")[0].reset();
+                $('#editModal').modal('toggle');
             
           },
           error: function (e) {
@@ -355,7 +391,7 @@
         });
       }
 
-         });
+        });
     </script>
 
 </body>

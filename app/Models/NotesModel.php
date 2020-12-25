@@ -6,6 +6,8 @@ use CodeIgniter\Model;
 class NotesModel extends Model
 {
     protected $table = 'notes';
+
+    protected $primaryKey = 'id';
     
-    protected $allowedFields = ['title', 'note'];
+    protected $allowedFields = ['id','title', 'note','created'];
 }

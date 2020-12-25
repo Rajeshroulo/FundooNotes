@@ -33,17 +33,40 @@ class Notes extends BaseController{
             'title' => $this->request->getVar('title'),
             'note'  => $this->request->getVar('note'),
         ];
-        $notesModel->insert($data);
-        return $this->response->redirect(site_url('/user'));
+       echo $notesModel->insert($data);
         
     }
 
     public function notelist(){
         $notesModel = new NotesModel();
-        $data['notes'] = $notesModel->orderBy('title', 'DESC')->findAll();   
+        $data['notes'] = $notesModel->orderBy('id', 'DESC')->findAll();   
             return view('Notelist', $data);        
           
     }
+
+    public function singleNote(){
+        $notesModel = new NotesModel();
+        $data['notes'] = $notesModel->where('id',$this->request->getVar('noteid'))->findAll();   
+            return view('Notelist', $data);        
+          
+    }
+
+    public function editNote(){
+        $notesModel = new NotesModel();
+        $id = $this->request->getVar('noteid');
+        $update = [
+            'id' => $this->request->getVar('noteid'),
+        ];
+        $data = [
+            'title' => $this->request->getVar('title'),
+            'note'  => $this->request->getVar('note'),
+        ];
+        $notesModel->update($update, $data);
+
+        $data['updatednote'] = $notesModel->where('id', $id)->first();
+        return view('UpdatedNote', $data);
+    }
+
 }
 
 ?>
