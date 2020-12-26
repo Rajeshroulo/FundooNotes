@@ -52,6 +52,7 @@ class Notes extends BaseController{
     }
 
     public function editNote(){
+
         $notesModel = new NotesModel();
         $id = $this->request->getVar('noteid');
         $update = [
@@ -66,6 +67,19 @@ class Notes extends BaseController{
         $data['updatednote'] = $notesModel->where('id', $id)->first();
         return view('Notelist', $data);
     }
+
+    public function deleteNote(){
+        $notesModel = new NotesModel();
+        $id = $this->request->getVar('noteid');
+        $delete = [
+            'id' => $this->request->getVar('noteid'),
+        ];
+        
+        $data['note'] = $notesModel->where($delete)->delete();
+        return $this->response->redirect(site_url('/notelist'));
+       
+    }
+
 
 }
 

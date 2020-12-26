@@ -43,8 +43,7 @@ $routes->get('/note', 'Notes::addNote');
 $routes->get('/notelist', 'Notes::notelist');
 $routes->post('/onenote', 'Notes::singleNote');
 $routes->post('/editnote', 'Notes::editNote');
-
-
+$routes->post('/deletenote', 'Notes::deleteNote');
 
 
 

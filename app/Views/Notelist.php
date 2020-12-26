@@ -13,7 +13,7 @@
                             <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
-                            <a href="" class="btn btn-danger btn-sm">
+                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </a>
                         </div>
@@ -51,6 +51,36 @@
                     </div>
                 </div>
 
+
+                <div class="modal" id="deleteModal<?php echo $note['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Are you sure you want to Delete this</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form id="deletethenote<?php echo $note['id']; ?>">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="hidden" name="noteid" value="<?php echo $note['id']; ?>">
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>No</button>
+                                    <button type="submit" name="delete" class="btn btn-danger"><i class="fa fa-trash"></i>Delete </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            
+
                 <script>
                     $(document).ready(function() {
 
@@ -60,6 +90,11 @@
                             editNote();
                         });
 
+                        $("#deletethenote<?php echo $note['id']; ?>").submit(function(event) {
+                            // Prevent the form from submitting via the browser.
+                            event.preventDefault();
+                            deleteNote();
+                        });
 
                         function editNote() {
                             var formData = $('#editthenote<?php echo $note['id']; ?>').serialize();
@@ -74,9 +109,28 @@
                                     $("#noteadd<?php echo $note['id']; ?>").html(result);
 
                                 },
-                                error: function(e) {
-                                    alert("Error!")
-                                    console.log("failed to edit the note");
+                                error: function() {
+                                    alert("failed to edit the note");
+                                }
+                            });
+                        }
+
+
+                        function deleteNote() {
+                            var formData = $('#deletethenote<?php echo $note['id']; ?>').serialize();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "<?= site_url('/deletenote') ?>",
+                                data: formData,
+                                success: function(data) {
+                                    $("#noteadd<?php echo $note['id']; ?>").remove();
+                                    $("#deletethenote<?php echo $note['id']; ?>")[0].reset();
+                                    $("#deleteModal<?php echo $note['id']; ?>").modal('toggle');
+
+                                },
+                                error: function() {
+                                    alert("failed to delete the note");
                                 }
                             });
                         }
