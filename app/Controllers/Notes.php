@@ -64,7 +64,7 @@ class Notes extends BaseController{
         $notesModel->update($update, $data);
 
         $data['updatednote'] = $notesModel->where('id', $id)->first();
-        return view('UpdatedNote', $data);
+        return view('Notelist', $data);
     }
 
 }

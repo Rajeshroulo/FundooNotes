@@ -257,38 +257,9 @@
                         <a href="#" class="list-group-item">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
+
                     </div>
 
-
-                    <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Edit Note</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <form id="editthegreeting">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" placeholder="enter title" class="form-control" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Note</label>
-                                            <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" name="Save" class="btn btn-primary">Save </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -349,7 +320,6 @@
             }
 
 
-
             function noteAdd() {
                 // PREPARE FORM DATA
                 var formData = $("#addnote").serialize();
@@ -371,25 +341,6 @@
                     }
                 });
             }
-
-
-            function editNote() {
-
-        $.ajax({
-          type: "PUT",
-          url: "<?= site_url('/editnote') ?>",
-          data: formData,
-          success: function (data) {
-            $("#editthegreeting")[0].reset();
-                $('#editModal').modal('toggle');
-            
-          },
-          error: function (e) {
-            alert("Error!")
-            console.log("ERROR: ", e);
-          }
-        });
-      }
 
         });
     </script>
