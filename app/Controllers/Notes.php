@@ -64,8 +64,8 @@ class Notes extends BaseController{
         ];
         $notesModel->update($update, $data);
 
-        $data['updatednote'] = $notesModel->where('id', $id)->first();
-        return view('Notelist');
+        $data['notes'] = $notesModel->where('id', $id)->findAll();
+        return view('Updatedlist',$data);
     }
 
     public function deleteNote(){

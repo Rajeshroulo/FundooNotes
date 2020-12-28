@@ -1,6 +1,5 @@
 <?php if ($notes) : ?>
     <?php foreach ($notes as $note) : ?>
-        <div class="col-sm-4" id ="note<?php echo $note['id']; ?>">
             <div class="cards">
                 <div class="card-blocks">
                     <h5 class="card-titles"><?php echo $note['title']; ?></h5>
@@ -51,32 +50,6 @@
                     </div>
                 </div>
 
-
-                <div class="modal" id="deleteModal<?php echo $note['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">Are you sure you want to Delete this</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <form id="deletethenote<?php echo $note['id']; ?>">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input type="hidden" name="noteid" value="<?php echo $note['id']; ?>">
-                                    </div>                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>No</button>
-                                    <button type="submit" name="Delete" class="btn btn-danger"><i class="fa fa-trash"></i>Delete </button>
-                                </div>
-                            </form>                            
-                        </div>
-                    </div>
-                </div>            
-    
                 <script>
                     $(document).ready(function() {
 
@@ -84,12 +57,6 @@
                             // Prevent the form from submitting via the browser.
                             event.preventDefault();
                             editNote();
-                        });
-
-                        $("#deletethenote<?php echo $note['id']; ?>").submit(function(event) {
-                            // Prevent the form from submitting via the browser.
-                            event.preventDefault();
-                            deleteNote();
                         });
 
                         function editNote() {
@@ -102,7 +69,6 @@
                                 success: function(result) {
                                     $("#editthenote<?php echo $note['id']; ?>")[0].reset();
                                     $("#editModal<?php echo $note['id']; ?>").modal('toggle');
-                                    $("#note<?php echo $note['id']; ?>").html(result);
 
                                 },
                                 error: function() {
@@ -111,30 +77,10 @@
                             });
                         }
 
-
-                        function deleteNote() {
-                            var formData = $('#deletethenote<?php echo $note['id']; ?>').serialize();
-
-                            $.ajax({
-                                type: "POST",
-                                url: "<?= site_url('/deletenote') ?>",
-                                data: formData,
-                                success: function(data) {
-                                    $("#note<?php echo $note['id']; ?>").remove();
-                                    $("#deletethenote<?php echo $note['id']; ?>")[0].reset();
-                                    $("#deleteModal<?php echo $note['id']; ?>").modal('toggle');
-
-                                },
-                                error: function() {
-                                    alert("failed to delete the note");
-                                }
-                            });
-                        }
-
                     });
                 </script>
 
+
             </div>
-        </div>
     <?php endforeach; ?>
 <?php endif; ?>
