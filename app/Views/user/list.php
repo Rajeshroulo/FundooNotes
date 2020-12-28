@@ -255,6 +255,9 @@
                             <i class="fa fa-edit"></i> Label
                         </a>
                         <a href="#" class="list-group-item">
+                            <i class="fa fa-archive"></i> Archive
+                        </a>
+                        <a href="#" class="list-group-item">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
 
@@ -266,6 +269,7 @@
                 <div class="col-sm-9">
                     <div class="container">
                         <div class="row" id="noteadd">
+                            
                         </div>
                     </div>
                 </div>

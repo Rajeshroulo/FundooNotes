@@ -1,6 +1,6 @@
 <?php if ($notes) : ?>
     <?php foreach ($notes as $note) : ?>
-        <div class="col-sm-4">
+        <div class="col-sm-4" id ="note<?php echo $note['id']; ?>">
             <div class="cards">
                 <div class="card-blocks">
                     <h5 class="card-titles"><?php echo $note['title']; ?></h5>
@@ -106,7 +106,7 @@
                                 success: function(result) {
                                     $("#editthenote<?php echo $note['id']; ?>")[0].reset();
                                     $("#editModal<?php echo $note['id']; ?>").modal('toggle');
-                                    $("#noteadd<?php echo $note['id']; ?>").html(result);
+                                    $("#note<?php echo $note['id']; ?>").html(result);
 
                                 },
                                 error: function() {
@@ -124,7 +124,7 @@
                                 url: "<?= site_url('/deletenote') ?>",
                                 data: formData,
                                 success: function(data) {
-                                    $("#noteadd<?php echo $note['id']; ?>").remove();
+                                    $("#note<?php echo $note['id']; ?>").remove();
                                     $("#deletethenote<?php echo $note['id']; ?>")[0].reset();
                                     $("#deleteModal<?php echo $note['id']; ?>").modal('toggle');
 
