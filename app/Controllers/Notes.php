@@ -66,12 +66,16 @@ class Notes extends BaseController{
         $notesModel = new NotesModel();
         $data = [
             'archive' => true,
-            'created'=>("d-m-Y h:i:s A")
+            'created'=>date("d-m-Y h:i:s A")
         ];
 
         $data['notes'] = $notesModel->where($data)->findAll();   
-            return view('Archivelist', $data);                  
+            return view('Notelist', $data);                  
     }
+
+    public function archieve(){
+         return view('Archive');
+         }
 
     public function singleNote(){
         $notesModel = new NotesModel();

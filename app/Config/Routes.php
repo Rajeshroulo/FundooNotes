@@ -36,7 +36,6 @@ $routes->get('/login', 'User::login');
 $routes->post('/userlogin', 'User::userLogin');
 $routes->post('/submit', 'User::store');
 $routes->get('/register', 'User::register');
-$routes->get('/user/create', 'User::create');
 
 
 $routes->get('/note', 'Notes::addNote');
@@ -45,6 +44,10 @@ $routes->post('/onenote', 'Notes::singleNote');
 $routes->post('/editnote', 'Notes::editNote');
 $routes->post('/deletenote', 'Notes::deleteNote');
 $routes->post('/archive', 'Notes::archive');
+$routes->get('/archivelist', 'Notes::archiveList');
+$routes->get('/showarchive', 'Notes::archieve');
+
+
 
 
 

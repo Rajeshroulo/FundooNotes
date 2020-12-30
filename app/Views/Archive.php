@@ -196,44 +196,6 @@
 
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-12">
-                    <a href="#" data-toggle="modal" data-target="#basicModal" class="btn btn-primary">Add Note</a>
-                </div>
-
-                <div class="modal" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel"> Add Note</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <form id="addnote">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" name="title" placeholder="enter title" class="form-control" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Notes</label>
-                                        <input type="text" name="note" placeholder="enter notes" class="form-control" value="">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" name="Save" class="btn btn-primary">Save </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-4">
-            <div class="row">
                 <div class="col-sm-4 col-md-3 sidebar">
                     <div class="mini-submenu">
                         <span class="icon-bar"></span>
@@ -253,7 +215,7 @@
                         <a href="#" class="btn btn-default" data-toggle="modal" data-target="#editModal">
                             <i class="fa fa-edit"></i> Label
                         </a>
-                        <a href="<?= site_url('/showarchive') ?>" id ="archivelist" class="btn btn-default">
+                        <a href="" id="archivelist" class="btn btn-default">
                             <i class="fa fa-archive"></i> Archive
                         </a>
                         <a href="#" class="btn btn-default">
@@ -268,7 +230,7 @@
                 <div class="col-sm-9">
                     <div class="container">
                         <div class="row" id="noteadd">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -279,13 +241,20 @@
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                noteList();
+                archiveList();
             }, 30);
 
             $("#notes").click(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
                 noteList();
+
+            });
+
+            $("#archivelist").click(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                archiveList();
 
             });
 
@@ -344,6 +313,21 @@
                         $("#addnote")[0].reset();
                         $('#basicModal').modal('toggle');
 
+                    },
+                    error: function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+
+            function archiveList() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "<?= site_url('/archivelist') ?>",
+                    success: function(result) {
+                        $("#noteadd").html(result);
                     },
                     error: function(e) {
                         alert("Error!")
