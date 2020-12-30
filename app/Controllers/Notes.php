@@ -39,9 +39,38 @@ class Notes extends BaseController{
 
     public function notelist(){
         $notesModel = new NotesModel();
-        $data['notes'] = $notesModel->orderBy('id', 'DESC')->findAll();   
+        $data = [
+
+            'archive' => false,
+        ];
+
+        $data['notes'] = $notesModel->where($data)->findAll();   
             return view('Notelist', $data);        
           
+    }
+
+    public function archive(){
+        $notesModel = new NotesModel();
+        $id = $this->request->getVar('noteid');
+        $update = [
+            'id' => $this->request->getVar('noteid'),
+        ];
+        $data = [
+            'archive' => true,
+            'created'=> date('d-m-Y h:i:s A'),
+        ];
+       $notesModel->update($update,$data);              
+    }
+
+    public function archiveList(){
+        $notesModel = new NotesModel();
+        $data = [
+            'archive' => true,
+            'created'=>("d-m-Y h:i:s A")
+        ];
+
+        $data['notes'] = $notesModel->where($data)->findAll();   
+            return view('Archivelist', $data);                  
     }
 
     public function singleNote(){

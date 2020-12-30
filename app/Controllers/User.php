@@ -30,7 +30,6 @@ class User extends BaseController{
     public function userLogin(){
         $userModel = new UserModel();
         $data = [
-            'id' => $this->request->getVar('id'),
             'password' => $this->request->getVar('password'),
             'email'  => $this->request->getVar('email'),
         ];

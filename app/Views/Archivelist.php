@@ -11,7 +11,7 @@
                     <div class="card-footer">
                         <div class="float-right">
                             <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                <span title="" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
                             </a>
                             <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -80,6 +80,7 @@
                     </div>
                 </div>
 
+
                 <script>
                     $(document).ready(function() {
 
@@ -98,7 +99,8 @@
                         $("#archivenote<?php echo $note['id']; ?>").click(function(event) {
                             // Prevent the form from submitting via the browser.
                             event.preventDefault();
-                           id=<?php echo $note['id']; ?>;
+                            alert();
+                            id=<?php echo $note['id']; ?>;
                             archive(id);
                         });
 
@@ -121,8 +123,7 @@
                             });
                         }
 
-
-                        function deleteNote() {
+                        function deleteNote() {                            
                             var formData = $('#deletethenote<?php echo $note['id']; ?>').serialize();
 
                             $.ajax({

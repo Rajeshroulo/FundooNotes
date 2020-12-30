@@ -247,16 +247,16 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                        <a href="#" class="list-group-item">
-                            <i class="fa fa-list"></i> Notes
+                        <a href="" id="notes" class="btn btn-default">
+                            <i type="button" class="fa fa-list"></i> Notes
                         </a>
-                        <a href="#" class="list-group-item" data-toggle="modal" data-target="#editModal">
+                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#editModal">
                             <i class="fa fa-edit"></i> Label
                         </a>
-                        <a href="#" class="list-group-item">
+                        <a href="#" class="btn btn-default">
                             <i class="fa fa-archive"></i> Archive
                         </a>
-                        <a href="#" class="list-group-item">
+                        <a href="#" class="btn btn-default">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
 
@@ -281,6 +281,13 @@
             setTimeout(function() {
                 noteList();
             }, 30);
+
+            $("#notes").click(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                noteList();
+
+            });
 
             $("#addnote").submit(function(event) {
                 // Prevent the form from submitting via the browser.

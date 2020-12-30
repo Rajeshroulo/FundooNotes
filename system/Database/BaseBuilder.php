@@ -2514,6 +2514,7 @@ class BaseBuilder
 		{
 			if (CI_DEBUG)
 			{
+
 				throw new DatabaseException('You must use the "set" method to update an entry.');
 			}
 			// @codeCoverageIgnoreStart
