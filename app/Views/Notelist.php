@@ -26,9 +26,9 @@
                             <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
-                            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
+                            <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>                            
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -118,6 +118,12 @@
                             unarchive(id);
                         });
 
+                        $("#trashnote<?php echo $note['id']; ?>").click(function(event) {
+                            // Prevent the form from submitting via the browser.
+                            event.preventDefault();
+                            id = <?php echo $note['id']; ?>;
+                            archive(id);
+                        });
 
                         function editNote() {
                             var formData = $('#editthenote<?php echo $note['id']; ?>').serialize();
@@ -137,7 +143,6 @@
                                 }
                             });
                         }
-
 
                         function deleteNote() {
                             var formData = $('#deletethenote<?php echo $note['id']; ?>').serialize();
@@ -188,6 +193,24 @@
                                 },
                                 error: function() {
                                     alert("Failed to archive note");
+                                }
+                            });
+                        }
+
+
+                        function trash(id) {
+
+                            $.ajax({
+                                url: "<?= site_url('/trash') ?>",
+                                method: "POST",
+                                data: {
+                                    noteid: id
+                                },
+                                success: function(data) {
+                                    $("#note<?php echo $note['id']; ?>").remove();
+                                },
+                                error: function() {
+                                    alert("Failed to trash note");
                                 }
                             });
                         }

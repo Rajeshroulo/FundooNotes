@@ -256,7 +256,7 @@
                         <a href="<?= site_url('/showarchive') ?>" id ="archivelist" class="btn btn-default">
                             <i class="fa fa-archive"></i> Archive
                         </a>
-                        <a href="#" class="btn btn-default">
+                        <a href="<?= site_url('/showtrash') ?>" id ="trashlist" class="btn btn-default">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
                         <a href="<?= site_url('/logout') ?>" class="btn btn-default" >

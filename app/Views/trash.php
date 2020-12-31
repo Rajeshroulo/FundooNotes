@@ -241,7 +241,7 @@
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                archiveList();
+                trashList();
             }, 30);
 
             $("#notes").click(function(event) {
@@ -251,14 +251,13 @@
 
             });
 
-            $("#archivelist").click(function(event) {
+            $("#trashlist").click(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
-                archiveList();
+                trashList();
 
             });
 
-            
             $("#addnote").submit(function(event) {
                 // Prevent the form from submitting via the browser.
                 event.preventDefault();
@@ -322,11 +321,11 @@
                 });
             }
 
-            function archiveList() {
+            function trashList() {
 
                 $.ajax({
                     type: "GET",
-                    url: "<?= site_url('/archivelist') ?>",
+                    url: "<?= site_url('/trashlist') ?>",
                     success: function(result) {
                         $("#noteadd").html(result);
                     },
@@ -335,7 +334,7 @@
                         console.log("ERROR: ", e);
                     }
                 });
-            }            
+            }
 
         });
     </script>

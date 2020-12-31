@@ -9,5 +9,5 @@ class NotesModel extends Model
 
     protected $primaryKey = 'id';
     
-    protected $allowedFields = ['id','title', 'note','archive','created'];
+    protected $allowedFields = ['id','title', 'note','archive','trash','created'];
 }

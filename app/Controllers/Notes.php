@@ -88,8 +88,36 @@ class Notes extends BaseController{
 
     public function archieve(){
          return view('Archive');
-         }
+    }
 
+    public function trash(){
+        $notesModel = new NotesModel();
+        $id = $this->request->getVar('noteid');
+        $update = [
+            'id' => $this->request->getVar('noteid'),
+        ];
+        $data = [
+            'trash' => true,
+            'created'=> date('d-m-Y h:i:s A'),
+        ];
+       $notesModel->update($update,$data);              
+    }
+
+    public function trashList(){
+        $notesModel = new NotesModel();
+        $data = [
+            'trash' => true,
+            'created'=>date("d-m-Y h:i:s A")
+        ];
+
+        $data['notes'] = $notesModel->where($data)->findAll();   
+            return view('Notelist', $data);                  
+    }
+
+    public function trashview(){
+        return view('trash');
+   }
+    
     public function singleNote(){
         $notesModel = new NotesModel();
         $data['notes'] = $notesModel->where('id',$this->request->getVar('noteid'))->findAll();   
