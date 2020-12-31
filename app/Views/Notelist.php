@@ -10,15 +10,25 @@
                     </div>
                     <div class="card-footer">
                         <div class="float-right">
-                            <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                <span title="" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
-                            </a>
+                            <?php
+                            if ($note['archive'] == false) {
+                            ?>
+                                <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                    <span title="" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                                </a>
+                            <?php  } else { ?>
+                                <a href="" id="unarchivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                    <span title="" class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+                                </a>
+                            <?php  } ?>
+
+
                             <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
                             <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
+                            </a>                            
                         </div>
                     </div>
                 </div>
@@ -53,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="modal" id="deleteModal<?php echo $note['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -98,9 +107,17 @@
                         $("#archivenote<?php echo $note['id']; ?>").click(function(event) {
                             // Prevent the form from submitting via the browser.
                             event.preventDefault();
-                           id=<?php echo $note['id']; ?>;
+                            id = <?php echo $note['id']; ?>;
                             archive(id);
                         });
+
+                        $("#unarchivenote<?php echo $note['id']; ?>").click(function(event) {
+                            // Prevent the form from submitting via the browser.
+                            event.preventDefault();
+                            id = <?php echo $note['id']; ?>;
+                            unarchive(id);
+                        });
+
 
                         function editNote() {
                             var formData = $('#editthenote<?php echo $note['id']; ?>').serialize();
@@ -145,6 +162,23 @@
 
                             $.ajax({
                                 url: "<?= site_url('/archive') ?>",
+                                method: "POST",
+                                data: {
+                                    noteid: id
+                                },
+                                success: function(data) {
+                                    $("#note<?php echo $note['id']; ?>").remove();
+                                },
+                                error: function() {
+                                    alert("Failed to archive note");
+                                }
+                            });
+                        }
+
+                        function unarchive(id) {
+
+                            $.ajax({
+                                url: "<?= site_url('/unarchive') ?>",
                                 method: "POST",
                                 data: {
                                     noteid: id

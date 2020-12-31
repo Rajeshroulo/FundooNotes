@@ -259,6 +259,9 @@
                         <a href="#" class="btn btn-default">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
+                        <a action="<?= site_url('/logout') ?>" method="post" class="btn btn-default" >
+                                <i class="fa fa-user"></i>Logout
+                            </a>
 
                     </div>
 

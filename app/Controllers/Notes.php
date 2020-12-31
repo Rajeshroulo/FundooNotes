@@ -62,6 +62,19 @@ class Notes extends BaseController{
        $notesModel->update($update,$data);              
     }
 
+    public function unarchive(){
+        $notesModel = new NotesModel();
+        $id = $this->request->getVar('noteid');
+        $update = [
+            'id' => $this->request->getVar('noteid'),
+        ];
+        $data = [
+            'archive' => false,
+            'created'=> date('d-m-Y h:i:s A'),
+        ];
+       $notesModel->update($update,$data);              
+    }
+
     public function archiveList(){
         $notesModel = new NotesModel();
         $data = [

@@ -80,7 +80,7 @@ class User extends BaseController{
          helper(['form']);
         
         return view('user/create');
-    }
+    }    
 
 }
 
