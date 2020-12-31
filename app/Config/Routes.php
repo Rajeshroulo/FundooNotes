@@ -36,8 +36,7 @@ $routes->get('/login', 'User::login');
 $routes->post('/userlogin', 'User::userLogin');
 $routes->post('/submit', 'User::store');
 $routes->get('/register', 'User::register');
-$routes->post('/logout', 'User::logout');
-
+$routes->get('/logout', 'User::logout');
 
 
 $routes->get('/note', 'Notes::addNote');

@@ -80,7 +80,15 @@ class User extends BaseController{
          helper(['form']);
         
         return view('user/create');
-    }    
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['userId']);
+        unset($_SESSION['userPassword']);
+        unset($_SESSION['userEmail']);
+        return $this->response->redirect(site_url('/login'));
+    }
 
 }
 
