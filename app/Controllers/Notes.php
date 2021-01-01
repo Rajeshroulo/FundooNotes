@@ -117,6 +117,19 @@ class Notes extends BaseController{
     public function trashview(){
         return view('trash');
    }
+
+   public function restore(){
+    $notesModel = new NotesModel();
+    $id = $this->request->getVar('noteid');
+    $update = [
+        'id' => $this->request->getVar('noteid'),
+    ];
+    $data = [
+        'trash' => false,
+        'created'=> date('d-m-Y h:i:s A'),
+    ];
+   $notesModel->update($update,$data);              
+}
     
     public function singleNote(){
         $notesModel = new NotesModel();

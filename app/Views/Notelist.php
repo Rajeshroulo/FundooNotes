@@ -26,9 +26,18 @@
                             <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
-                            <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
+                            <?php
+                            if ($note['trash'] == false) {
+                            ?>
+                                <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
+                            <?php  } else { ?>
+                                <a href="" id="restorenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                                </a>
+                            <?php  } ?>
+
                         </div>
                     </div>
                 </div>
@@ -63,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <div class="modal" id="deleteModal<?php echo $note['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
                     <div class="modal-dialog">
@@ -122,7 +132,14 @@
                             // Prevent the form from submitting via the browser.
                             event.preventDefault();
                             id = <?php echo $note['id']; ?>;
-                            archive(id);
+                            trash(id);
+                        });
+
+                        $("#restorenote<?php echo $note['id']; ?>").click(function(event) {
+                            // Prevent the form from submitting via the browser.
+                            event.preventDefault();
+                            id = <?php echo $note['id']; ?>;
+                            restore(id);
                         });
 
                         function editNote() {
@@ -211,6 +228,23 @@
                                 },
                                 error: function() {
                                     alert("Failed to trash note");
+                                }
+                            });
+                        }
+
+                        function restore(id) {
+
+                            $.ajax({
+                                url: "<?= site_url('/restore') ?>",
+                                method: "POST",
+                                data: {
+                                    noteid: id
+                                },
+                                success: function(data) {
+                                    $("#note<?php echo $note['id']; ?>").remove();
+                                },
+                                error: function() {
+                                    alert("Failed to restore note");
                                 }
                             });
                         }

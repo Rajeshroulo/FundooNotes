@@ -49,6 +49,7 @@ $routes->post('/unarchive', 'Notes::unarchive');
 $routes->get('/archivelist', 'Notes::archiveList');
 $routes->get('/showarchive', 'Notes::archieve');
 $routes->post('/trash', 'Notes::trash');
+$routes->post('/restore', 'Notes::restore');
 $routes->get('/trashlist', 'Notes::trashList');
 $routes->get('/showtrash', 'Notes::trashview');
 
