@@ -42,6 +42,7 @@ class Notes extends BaseController{
         $data = [
 
             'archive' => false,
+            'trash'=> false,
         ];
 
         $data['notes'] = $notesModel->where($data)->findAll();   
@@ -57,7 +58,7 @@ class Notes extends BaseController{
         ];
         $data = [
             'archive' => true,
-            'created'=> date('d-m-Y h:i:s A'),
+            'created'=> date('d-m-y h:i:s '),
         ];
        $notesModel->update($update,$data);              
     }
@@ -70,7 +71,7 @@ class Notes extends BaseController{
         ];
         $data = [
             'archive' => false,
-            'created'=> date('d-m-Y h:i:s A'),
+            'created'=> date('d-m-y h:i:s '),
         ];
        $notesModel->update($update,$data);              
     }
@@ -79,7 +80,6 @@ class Notes extends BaseController{
         $notesModel = new NotesModel();
         $data = [
             'archive' => true,
-            'created'=>date("d-m-Y h:i:s A")
         ];
 
         $data['notes'] = $notesModel->where($data)->findAll();   
@@ -98,7 +98,7 @@ class Notes extends BaseController{
         ];
         $data = [
             'trash' => true,
-            'created'=> date('d-m-Y h:i:s A'),
+            'created'=> date('d-m-y h:i:s '),
         ];
        $notesModel->update($update,$data);              
     }
@@ -107,7 +107,6 @@ class Notes extends BaseController{
         $notesModel = new NotesModel();
         $data = [
             'trash' => true,
-            'created'=>date("d-m-Y h:i:s A")
         ];
 
         $data['notes'] = $notesModel->where($data)->findAll();   
@@ -126,7 +125,7 @@ class Notes extends BaseController{
     ];
     $data = [
         'trash' => false,
-        'created'=> date('d-m-Y h:i:s A'),
+        'created'=> date('d-m-y h:i:s'),
     ];
    $notesModel->update($update,$data);              
 }
@@ -167,6 +166,34 @@ class Notes extends BaseController{
        
     }
 
+    function upload() { 
+        $notesModel = new NotesModel();
+
+        helper(['form', 'url']);
+                 
+        $input = $this->validate([
+            'file' => [
+                'uploaded[file]',
+                'mime_in[file,image/jpg,image/jpeg,image/png]',
+                'max_size[file,1024]',
+            ]
+        ]);
+    
+        if (!$input) {
+            print_r('Choose a valid file');
+        } else {
+            $img = $this->request->getFile('file');
+            $img->move(WRITEPATH . 'uploads');
+    
+            $data = [
+               'name' =>  $img->getName(),
+               'type'  => $img->getClientMimeType()
+            ];
+    
+            $save = $notesModel->insert($data);
+            print_r('File has successfully uploaded');        
+        }
+    }
 
 }
 

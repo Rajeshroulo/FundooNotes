@@ -14,27 +14,33 @@
                             if ($note['archive'] == false) {
                             ?>
                                 <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                    <span title="" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                                    <span title="archive" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
                                 </a>
                             <?php  } else { ?>
                                 <a href="" id="unarchivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                    <span title="" class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+                                    <span title="unarchive" class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
                                 </a>
                             <?php  } ?>
-
-
-                            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <a href="" class="btn btn-default btn-rounded">
+                                <span title="Add image" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                             </a>
+
                             <?php
                             if ($note['trash'] == false) {
                             ?>
-                                <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
+                                    <span title="edit" class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
+                                <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                    <span title="move to trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
+
                             <?php  } else { ?>
                                 <a href="" id="restorenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
-                                    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                                    <span title="restore" class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                                </a>
+                                <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
+                                    <span title="delete" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             <?php  } ?>
 
@@ -78,7 +84,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">Are you sure you want to Delete this</h4>
+                                <h4 class="modal-title" id="myModalLabel"> Are you sure you want to permanently delete this</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -111,7 +117,8 @@
                         $("#deletethenote<?php echo $note['id']; ?>").submit(function(event) {
                             // Prevent the form from submitting via the browser.
                             event.preventDefault();
-                            deleteNote();
+                            id = <?php echo $note['id']; ?>;
+                            deleteNote(id);
                         });
 
                         $("#archivenote<?php echo $note['id']; ?>").click(function(event) {
@@ -161,14 +168,17 @@
                             });
                         }
 
-                        function deleteNote() {
-                            var formData = $('#deletethenote<?php echo $note['id']; ?>').serialize();
+                        function deleteNote(id) {
+                            var formData = $('#deleteanote<?php echo $note['id']; ?>').serialize();
 
                             $.ajax({
                                 type: "POST",
                                 url: "<?= site_url('/deletenote') ?>",
-                                data: formData,
-                                success: function(data) {
+                                formdata: formData,
+                                data: {
+                                    noteid: id
+                                },
+                                success: function(formdata, data) {
                                     $("#note<?php echo $note['id']; ?>").remove();
                                     $("#deletethenote<?php echo $note['id']; ?>")[0].reset();
                                     $("#deleteModal<?php echo $note['id']; ?>").modal('toggle');

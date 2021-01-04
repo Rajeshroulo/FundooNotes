@@ -215,10 +215,10 @@
                         <a href="#" class="btn btn-default" data-toggle="modal" data-target="#editModal">
                             <i class="fa fa-edit"></i> Label
                         </a>
-                        <a href="" id="archivelist" class="btn btn-default">
+                        <a href="<?= site_url('/showarchive') ?>" id="archivelist" class="btn btn-default">
                             <i class="fa fa-archive"></i> Archive
                         </a>
-                        <a href="" id="trashlist" class="btn btn-default">
+                        <a href="<?= site_url('/showtrash') ?>" id="trashlist" class="btn btn-default">
                             <i class="fa fa-trash-o"></i> Trash
                         </a>
 
