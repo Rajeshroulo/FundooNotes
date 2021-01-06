@@ -37,6 +37,7 @@ class Notes extends BaseController{
         
     }
 
+        
     public function notelist(){
         $notesModel = new NotesModel();
         $data = [
@@ -138,7 +139,7 @@ class Notes extends BaseController{
     }
 
     public function editNote(){
-
+    
         $notesModel = new NotesModel();
         $id = $this->request->getVar('noteid');
         $update = [

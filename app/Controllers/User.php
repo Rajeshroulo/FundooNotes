@@ -15,7 +15,14 @@ class User extends BaseController{
     public function index(){
         $userModel = new UserModel();
         $data['user'] = $userModel->orderBy('id', 'DESC')->findAll();
-        return view ('user/list');
+        if(isset($this->session->userId))
+        {
+            return view ('user/list');
+        }
+        else
+        {
+            return $this->response->redirect(site_url('/login'));
+        }  
     }
 
     public function login(){
@@ -37,7 +44,6 @@ class User extends BaseController{
         if(!empty($users=$userModel->where($data)->first()))
         {
             $_SESSION['userId']=$users['id'];
-            $_SESSION['userPassword']=$users['password'];
             $_SESSION['userEmail']=$users['email'];
             // $userId=$this->session->userId;
             return $this->response->redirect(site_url('/user'));
@@ -85,7 +91,6 @@ class User extends BaseController{
     public function logout()
     {
         unset($_SESSION['userId']);
-        unset($_SESSION['userPassword']);
         unset($_SESSION['userEmail']);
         return $this->response->redirect(site_url('/login'));
     }

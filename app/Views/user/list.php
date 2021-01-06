@@ -247,31 +247,69 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                        <a href="" id="notes" class="btn btn-default">
-                            <i type="button" class="fa fa-list"></i> Notes
-                        </a>
-                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#editModal">
-                            <i class="fa fa-edit"></i> Label
-                        </a>
-                        <a href="<?= site_url('/showarchive') ?>" id ="archivelist" class="btn btn-default">
-                            <i class="fa fa-archive"></i> Archive
-                        </a>
-                        <a href="<?= site_url('/showtrash') ?>" id ="trashlist" class="btn btn-default">
-                            <i class="fa fa-trash-o"></i> Trash
-                        </a>
-                        <a href="<?= site_url('/logout') ?>" class="btn btn-default" >
+                        <div style="float: left;">
+                            <a href="" id="notes" class="btn btn-default">
+                                <i type="button" class="fa fa-list"></i> Notes
+                            </a>
+                        </div>
+                        <div style="float: left;">
+                            <a href="#" class="btn btn-default" data-toggle="modal" data-target="#editModal">
+                                <i class="fa fa-edit"></i> Edit labels
+                            </a>
+                        </div>
+                        <div id ="newlabel">
+                        
+                        </div>                        
+                        <div style="float: left;">
+                            <a href="<?= site_url('/showarchive') ?>" id="archivelist" class="btn btn-default">
+                                <i class="fa fa-archive"></i> Archive
+                            </a>
+                        </div>
+                        <div style="float: left;">
+                            <a href="<?= site_url('/showtrash') ?>" id="trashlist" class="btn btn-default">
+                                <i class="fa fa-trash-o"></i> Trash
+                            </a>
+                        </div>
+                        <div style="float: left;">
+                            <a href="<?= site_url('/logout') ?>" class="btn btn-default">
                                 <i class="fa fa-user"></i>Logout
                             </a>
-
+                        </div>
                     </div>
+                </div>
 
+                <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">Add New Label</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form id="editthelabel">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="title" placeholder="enter title" class="form-control">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="Save" class="btn btn-primary">Save </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
 
                 <div class="col-sm-9">
                     <div class="container">
                         <div class="row" id="noteadd">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -297,6 +335,12 @@
                 event.preventDefault();
                 noteAdd();
 
+            });
+
+            $("#editModal").submit(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                addLabel();
             });
 
             function noteList() {
@@ -347,6 +391,27 @@
                         $("#addnote")[0].reset();
                         $('#basicModal').modal('toggle');
 
+                    },
+                    error: function(e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
+
+            function addLabel() {
+                var formData = $("#editthelabel").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?= site_url('/addthelabel') ?>",
+                    data: formData,
+                    success: function(result) { 
+                        var array = JSON.parse(result);
+                       
+                        $('#newlabel').append("<div style='float: left;' > <a class='btn btn-default'> <i class='fa fa-tag'></i>"+ array.label+"</a></div>");
+                        $("#editthelabel")[0].reset();
+                        $("#editModal").modal('toggle');
                     },
                     error: function(e) {
                         alert("Error!")

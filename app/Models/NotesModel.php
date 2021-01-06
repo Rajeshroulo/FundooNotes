@@ -11,3 +11,4 @@ class NotesModel extends Model
     
     protected $allowedFields = ['id','title', 'note','image','colour','archive','trash','created'];
 }
+?>

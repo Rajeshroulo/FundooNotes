@@ -31,16 +31,20 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'User::index');
-$routes->post('/addthenote', 'Notes::addNote');
 $routes->get('/login', 'User::login');
 $routes->post('/userlogin', 'User::userLogin');
 $routes->post('/submit', 'User::store');
 $routes->get('/register', 'User::register');
 $routes->get('/logout', 'User::logout');
 
+$routes->get('/label', 'Labels::index');
+$routes->post('/addthelabel', 'Labels::addLabel');
+
+
 
 $routes->get('/note', 'Notes::addNote');
 $routes->get('/notelist', 'Notes::notelist');
+$routes->post('/addthenote', 'Notes::addNote');
 $routes->post('/onenote', 'Notes::singleNote');
 $routes->post('/editnote', 'Notes::editNote');
 $routes->post('/deletenote', 'Notes::deleteNote');

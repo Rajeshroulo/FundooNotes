@@ -224,7 +224,6 @@
                             });
                         }
 
-
                         function trash(id) {
 
                             $.ajax({
