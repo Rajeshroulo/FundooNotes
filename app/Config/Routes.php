@@ -37,8 +37,11 @@ $routes->post('/submit', 'User::store');
 $routes->get('/register', 'User::register');
 $routes->get('/logout', 'User::logout');
 
+
+
 $routes->get('/label', 'Labels::index');
 $routes->post('/addthelabel', 'Labels::addLabel');
+$routes->get('/labellist', 'Labels::labelList');
 
 
 

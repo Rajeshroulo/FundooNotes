@@ -55,6 +55,12 @@
             box-shadow: none;
         }
 
+        .card-bodys {
+            padding-top: 5px;
+            padding-right: 50px;
+
+        }
+
         .card-img-top {
             display: block;
             width: 100%;
@@ -68,16 +74,17 @@
         }
 
         .card-footer {
-            font-size: 1em;
+            font-size: 1px;
             position: static;
             top: 0;
             left: 0;
             max-width: 100%;
-            padding: .75em 1em;
+            padding: .5em .5em;
             color: rgba(0, 0, 0, .4);
             border-top: 1px solid rgba(0, 0, 0, .05) !important;
             background: #fff;
-            margin-bottom: 15px;
+            padding-top: 20px;
+
         }
 
         .card-inverse .btn {
@@ -257,9 +264,11 @@
                                 <i class="fa fa-edit"></i> Edit labels
                             </a>
                         </div>
-                        <div id ="newlabel">
-                        
-                        </div>                        
+
+                        <div id="newlabel">
+
+                        </div>
+
                         <div style="float: left;">
                             <a href="<?= site_url('/showarchive') ?>" id="archivelist" class="btn btn-default">
                                 <i class="fa fa-archive"></i> Archive
@@ -406,10 +415,10 @@
                     type: "POST",
                     url: "<?= site_url('/addthelabel') ?>",
                     data: formData,
-                    success: function(result) { 
+                    success: function(result) {
                         var array = JSON.parse(result);
-                       
-                        $('#newlabel').append("<div style='float: left;' > <a class='btn btn-default'> <i class='fa fa-tag'></i>"+ array.label+"</a></div>");
+
+                        $('#newlabel').append("<div style='float: left;' > <a class='btn btn-default'> <i class='fa fa-tag'></i>" + array.label + "</a></div>");
                         $("#editthelabel")[0].reset();
                         $("#editModal").modal('toggle');
                     },

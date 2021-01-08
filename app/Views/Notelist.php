@@ -5,7 +5,7 @@
                 <div class="card-blocks">
                     <h5 class="card-titles"><?php echo $note['title']; ?></h5>
 
-                    <div class="card-body">
+                    <div class="card-bodys">
                         <?php echo $note['note']; ?>
                     </div>
                     <div class="card-footer">
@@ -13,33 +13,39 @@
                             <?php
                             if ($note['archive'] == false) {
                             ?>
-                                <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                <a href="" id="archivenote<?php echo $note['id']; ?>" class="btn btn-default btn-sm">
                                     <span title="archive" class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
                                 </a>
                             <?php  } else { ?>
-                                <a href="" id="unarchivenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                <a href="" id="unarchivenote<?php echo $note['id']; ?>" class="btn btn-default btn-sm ">
                                     <span title="unarchive" class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
                                 </a>
                             <?php  } ?>
-                            <a href="" class="btn btn-default btn-rounded">
+
+                            <a href="" class="btn btn-default btn-sm">
                                 <span title="Add image" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                             </a>
+
+                            <a href="" class="btn btn-default btn-sm" data-toggle="modal" data-target="#colorModal<?php echo $note['id']; ?>">
+                                <span title="Change colour" class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                            </a>
+
 
                             <?php
                             if ($note['trash'] == false) {
                             ?>
-                                <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
+                                <a href="" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editModal<?php echo $note['id']; ?>">
                                     <span title="edit" class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
-                                <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                <a href="" id="trashnote<?php echo $note['id']; ?>" class="btn btn-default btn-sm">
                                     <span title="move to trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
 
                             <?php  } else { ?>
-                                <a href="" id="restorenote<?php echo $note['id']; ?>" class="btn btn-default btn-rounded">
+                                <a href="" id="restorenote<?php echo $note['id']; ?>" class="btn btn-default btn-sm">
                                     <span title="restore" class="glyphicon glyphicon-upload" aria-hidden="true"></span>
                                 </a>
-                                <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
+                                <a href="" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal<?php echo $note['id']; ?>">
                                     <span title="delete" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             <?php  } ?>
@@ -99,6 +105,31 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>No</button>
                                     <button type="submit" name="Delete" class="btn btn-danger"><i class="fa fa-trash"></i>Delete </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="colorModal<?php echo $note['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">Add colour</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form id="colornote<?php echo $note['id']; ?>">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="hidden" name="noteid" value="<?php echo $note['id']; ?>">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
                         </div>

@@ -42,9 +42,21 @@ class Labels extends BaseController{
        echo json_encode($value);       
     }
 
-    public function labelList(){}
+    public function labelList(){
+        $labelModel = new LabelModel();
+        $data['labels'] = $labelModel->where('userid', $this->session->userId)->findAll();
+
+        if(isset($this->session->userId))
+        {
+            return view('Labellist', $data);
+        }
+        else
+        {
+            return $this->response->redirect(site_url('/login'));
+        }   
 
 
+    }
 
 }
 ?>    
